@@ -9,6 +9,9 @@ export type Project = {
   categories: ProjectCategory[];
   liveUrl?: string;
   repoUrl?: string;
+  visualNote?: string;
+  confidential?: boolean;
+  images?: { src: string; alt: string }[];
 };
 
 export const projects: Project[] = [
@@ -54,6 +57,7 @@ export const projects: Project[] = [
     tech: ["Node.js", "Express", "MongoDB", "Mongoose", "Axios", "APIs REST", "Webhooks"],
     categories: ["Backend", "APIs e Integrações", "Automação"],
     repoUrl: "https://github.com/Rilobaron/flowbridge-api",
+    visualNote: "API backend - projeto sem interface gráfica",
   },
   {
     id: "logistics-ticket-generator",
@@ -76,17 +80,19 @@ export const projects: Project[] = [
     id: "starcore",
     name: "StarCore",
     description:
-      "Plataforma web modular voltada à centralização de processos empresariais, gestão de leads, integrações, comunicação e automação.",
+      "Plataforma web modular desenvolvida para centralizar processos empresariais, integrações e automações. Informações sensíveis foram omitidas por confidencialidade.",
     features: [
-      "Gestão de usuários e permissões",
-      "Gestão de leads",
-      "Webhooks ativos e passivos",
-      "Mapeamento de campos JSON",
-      "Gestão de e-mails",
-      "Integrações externas",
+      "Desenvolvimento de plataforma web modular",
+      "Arquitetura de aplicação",
+      "Integrações entre sistemas",
+      "Automação de processos",
+      "Gestão de dados",
+      "Interface administrativa",
     ],
     tech: [],
     categories: ["Full Stack", "APIs e Integrações"],
+    visualNote: "Projeto confidencial - imagens e código não disponíveis",
+    confidential: true,
   },
   {
     id: "jt-base",
@@ -103,6 +109,20 @@ export const projects: Project[] = [
     ],
     tech: [],
     categories: ["Full Stack", "Automação"],
+    images: [
+      {
+        src: "/projects/gestao-base/relatorios-operacionais.png",
+        alt: "Painel de relatórios operacionais do Gestão de Base",
+      },
+      {
+        src: "/projects/gestao-base/importacoes.png",
+        alt: "Tela de importação de planilhas do Gestão de Base",
+      },
+      {
+        src: "/projects/gestao-base/recebimento.png",
+        alt: "Tela de conferência de recebimento do Gestão de Base",
+      },
+    ],
   },
   {
     id: "portfolio",
@@ -121,7 +141,7 @@ export const projects: Project[] = [
     categories: ["Full Stack"],
     repoUrl: "https://github.com/Rilobaron",
   },
-];
+].sort((a, b) => Number(b.id === "jt-base") - Number(a.id === "jt-base"));
 
 export const projectFilters: ("Todos" | ProjectCategory)[] = [
   "Todos",

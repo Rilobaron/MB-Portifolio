@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { ExternalLink, Github, Code2 } from "lucide-react";
+import { ExternalLink, Github, Code2, LockKeyhole } from "lucide-react";
 import { projects, projectFilters, type ProjectCategory } from "@/data/projects";
 import { SectionHeader } from "./SectionHeader";
 
@@ -45,23 +45,55 @@ export function Projects() {
                 index < 3 || showAllMobile ? "flex" : "hidden md:flex"
               }`}
             >
-              <div className="relative h-40 bg-graphite overflow-hidden">
+              {p.images?.length ? (
                 <div
-                  className="absolute inset-0 opacity-20"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
-                    backgroundSize: "24px 24px",
-                  }}
-                />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="rounded-2xl border border-white/15 bg-white/5 backdrop-blur px-5 py-3 text-white font-display text-lg font-bold">
-                    <span className="text-gold mr-2">/</span>
-                    {p.name}
-                  </div>
+                  className="flex h-48 snap-x snap-mandatory overflow-x-auto bg-graphite md:h-52"
+                  aria-label={`Galeria de imagens do projeto ${p.name}`}
+                >
+                  {p.images.map((image, imageIndex) => (
+                    <figure key={image.src} className="relative h-full min-w-full snap-center">
+                      <img
+                        src={image.src}
+                        alt={image.alt}
+                        width={1920}
+                        height={900}
+                        loading="lazy"
+                        className="h-full w-full object-cover object-left-top"
+                      />
+                      <figcaption className="absolute bottom-3 right-3 rounded-full bg-black/75 px-2.5 py-1 text-[11px] font-medium text-white backdrop-blur">
+                        {imageIndex + 1} / {p.images?.length}
+                      </figcaption>
+                    </figure>
+                  ))}
                 </div>
-                <Code2 className="absolute bottom-3 right-3 h-5 w-5 text-gold/70" />
-              </div>
+              ) : (
+                <div className="relative h-40 bg-graphite overflow-hidden">
+                  <div
+                    className="absolute inset-0 opacity-20"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
+                      backgroundSize: "24px 24px",
+                    }}
+                  />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center px-5 text-center">
+                    <div className="rounded-2xl border border-white/15 bg-white/5 backdrop-blur px-5 py-3 text-white font-display text-lg font-bold">
+                      <span className="text-gold mr-2">/</span>
+                      {p.name}
+                    </div>
+                    {p.visualNote && (
+                      <p className="mt-3 max-w-xs text-xs leading-relaxed text-white/65">
+                        {p.visualNote}
+                      </p>
+                    )}
+                  </div>
+                  {p.confidential ? (
+                    <LockKeyhole className="absolute bottom-3 right-3 h-5 w-5 text-gold/70" />
+                  ) : (
+                    <Code2 className="absolute bottom-3 right-3 h-5 w-5 text-gold/70" />
+                  )}
+                </div>
+              )}
 
               <div className="flex flex-col flex-1 p-6">
                 <h3 className="font-display text-xl font-bold text-graphite">{p.name}</h3>
@@ -94,10 +126,17 @@ export function Projects() {
                   </div>
                 )}
 
-                <div className="mt-6 flex flex-wrap gap-2 pt-4 border-t border-border">
-                  <ProjectLink href={p.liveUrl} icon={ExternalLink} label="Ver projeto" primary />
-                  <ProjectLink href={p.repoUrl} icon={Github} label="Ver código" />
-                </div>
+                {p.confidential ? (
+                  <p className="mt-6 flex items-center gap-2 border-t border-border pt-4 text-sm text-ash">
+                    <LockKeyhole className="h-4 w-4 text-gold" />
+                    Materiais preservados por confidencialidade.
+                  </p>
+                ) : (
+                  <div className="mt-6 flex flex-wrap gap-2 pt-4 border-t border-border">
+                    <ProjectLink href={p.liveUrl} icon={ExternalLink} label="Ver projeto" primary />
+                    <ProjectLink href={p.repoUrl} icon={Github} label="Ver código" />
+                  </div>
+                )}
               </div>
             </article>
           ))}

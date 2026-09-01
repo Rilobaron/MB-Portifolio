@@ -9,6 +9,17 @@ export type Experience = {
 
 export const experiences: Experience[] = [
   {
+    company: "Bonistar",
+    role: "Desenvolvedor Full Stack",
+    period: "Atual",
+    description:
+      "Atuação atual no desenvolvimento e evolução de aplicações web, trabalhando nas diferentes camadas dos produtos.",
+    activities: [
+      "Desenvolvimento e manutenção de aplicações Full Stack",
+      "Atuação em funcionalidades de frontend e backend",
+    ],
+  },
+  {
     company: "SprintHub",
     location: "Sorocaba, SP",
     role: "Analista de Suporte II",
