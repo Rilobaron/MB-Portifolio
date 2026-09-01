@@ -20,6 +20,20 @@ export const experiences: Experience[] = [
     ],
   },
   {
+    company: "J&T Express",
+    location: "Itu, SP",
+    role: "Operações e desenvolvimento de soluções internas",
+    period: "Atual",
+    description:
+      "Acompanhamento operacional da base, análise de encomendas e criação de soluções para melhorar o controle de processos internos.",
+    activities: [
+      "Acompanhamento de encomendas retidas e sem movimentação",
+      "Controle de tickets, ocorrências e indicadores",
+      "Identificação de gargalos operacionais",
+      "Desenvolvimento de uma aplicação para centralizar e automatizar processos",
+    ],
+  },
+  {
     company: "SprintHub",
     location: "Sorocaba, SP",
     role: "Analista de Suporte II",
@@ -70,19 +84,6 @@ export const experiences: Experience[] = [
       "Registro de pedidos em PDV e emissão de notas fiscais",
       "Acompanhamento de pedidos até a entrega",
       "Controle de estoque, requisições e arquivos administrativos",
-    ],
-  },
-  {
-    company: "J&T Express",
-    location: "Itu, SP",
-    role: "Operações e desenvolvimento de soluções internas",
-    description:
-      "Acompanhamento operacional da base, análise de encomendas e criação de soluções para melhorar o controle de processos internos.",
-    activities: [
-      "Acompanhamento de encomendas retidas e sem movimentação",
-      "Controle de tickets, ocorrências e indicadores",
-      "Identificação de gargalos operacionais",
-      "Desenvolvimento de uma aplicação para centralizar e automatizar processos",
     ],
   },
 ];

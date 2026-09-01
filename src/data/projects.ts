@@ -75,6 +75,16 @@ export const projects: Project[] = [
     tech: ["HTML5", "CSS3", "JavaScript", "Bootstrap 5", "Google Apps Script", "Google Sheets"],
     categories: ["APIs e Integrações", "Automação"],
     repoUrl: "https://github.com/Rilobaron/Logistics-Tool-Ticket-Generator",
+    images: [
+      {
+        src: "/projects/logistics-tools/gerador-de-mensagens.png",
+        alt: "Tela do gerador de mensagens do Logistics Tools",
+      },
+      {
+        src: "/projects/logistics-tools/planilha.png",
+        alt: "Tela de integração com planilha do Logistics Tools",
+      },
+    ],
   },
   {
     id: "starcore",

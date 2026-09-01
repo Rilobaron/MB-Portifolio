@@ -1,11 +1,22 @@
 import { useMemo, useState } from "react";
-import { ExternalLink, Github, Code2, LockKeyhole } from "lucide-react";
-import { projects, projectFilters, type ProjectCategory } from "@/data/projects";
+import {
+  ExternalLink,
+  Github,
+  Code2,
+  LockKeyhole,
+  Images,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+import { projects, projectFilters, type Project, type ProjectCategory } from "@/data/projects";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { SectionHeader } from "./SectionHeader";
 
 export function Projects() {
   const [filter, setFilter] = useState<"Todos" | ProjectCategory>("Todos");
   const [showAllMobile, setShowAllMobile] = useState(false);
+  const [galleryProject, setGalleryProject] = useState<Project | null>(null);
+  const [activeImage, setActiveImage] = useState(0);
 
   const filtered = useMemo(
     () => (filter === "Todos" ? projects : projects.filter((p) => p.categories.includes(filter))),
@@ -45,55 +56,32 @@ export function Projects() {
                 index < 3 || showAllMobile ? "flex" : "hidden md:flex"
               }`}
             >
-              {p.images?.length ? (
+              <div className="relative h-40 bg-graphite overflow-hidden">
                 <div
-                  className="flex h-48 snap-x snap-mandatory overflow-x-auto bg-graphite md:h-52"
-                  aria-label={`Galeria de imagens do projeto ${p.name}`}
-                >
-                  {p.images.map((image, imageIndex) => (
-                    <figure key={image.src} className="relative h-full min-w-full snap-center">
-                      <img
-                        src={image.src}
-                        alt={image.alt}
-                        width={1920}
-                        height={900}
-                        loading="lazy"
-                        className="h-full w-full object-cover object-left-top"
-                      />
-                      <figcaption className="absolute bottom-3 right-3 rounded-full bg-black/75 px-2.5 py-1 text-[11px] font-medium text-white backdrop-blur">
-                        {imageIndex + 1} / {p.images?.length}
-                      </figcaption>
-                    </figure>
-                  ))}
-                </div>
-              ) : (
-                <div className="relative h-40 bg-graphite overflow-hidden">
-                  <div
-                    className="absolute inset-0 opacity-20"
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
-                      backgroundSize: "24px 24px",
-                    }}
-                  />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center px-5 text-center">
-                    <div className="rounded-2xl border border-white/15 bg-white/5 backdrop-blur px-5 py-3 text-white font-display text-lg font-bold">
-                      <span className="text-gold mr-2">/</span>
-                      {p.name}
-                    </div>
-                    {p.visualNote && (
-                      <p className="mt-3 max-w-xs text-xs leading-relaxed text-white/65">
-                        {p.visualNote}
-                      </p>
-                    )}
+                  className="absolute inset-0 opacity-20"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
+                    backgroundSize: "24px 24px",
+                  }}
+                />
+                <div className="absolute inset-0 flex flex-col items-center justify-center px-5 text-center">
+                  <div className="rounded-2xl border border-white/15 bg-white/5 backdrop-blur px-5 py-3 text-white font-display text-lg font-bold">
+                    <span className="text-gold mr-2">/</span>
+                    {p.name}
                   </div>
-                  {p.confidential ? (
-                    <LockKeyhole className="absolute bottom-3 right-3 h-5 w-5 text-gold/70" />
-                  ) : (
-                    <Code2 className="absolute bottom-3 right-3 h-5 w-5 text-gold/70" />
+                  {p.visualNote && (
+                    <p className="mt-3 max-w-xs text-xs leading-relaxed text-white/65">
+                      {p.visualNote}
+                    </p>
                   )}
                 </div>
-              )}
+                {p.confidential ? (
+                  <LockKeyhole className="absolute bottom-3 right-3 h-5 w-5 text-gold/70" />
+                ) : (
+                  <Code2 className="absolute bottom-3 right-3 h-5 w-5 text-gold/70" />
+                )}
+              </div>
 
               <div className="flex flex-col flex-1 p-6">
                 <h3 className="font-display text-xl font-bold text-graphite">{p.name}</h3>
@@ -133,6 +121,19 @@ export function Projects() {
                   </p>
                 ) : (
                   <div className="mt-6 flex flex-wrap gap-2 pt-4 border-t border-border">
+                    {p.images?.length ? (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setGalleryProject(p);
+                          setActiveImage(0);
+                        }}
+                        className="inline-flex items-center gap-1.5 rounded-full bg-graphite px-3.5 py-1.5 text-sm font-medium text-white transition hover:bg-black"
+                      >
+                        <Images className="h-4 w-4 text-gold" />
+                        Ver fotos ({p.images.length})
+                      </button>
+                    ) : null}
                     <ProjectLink href={p.liveUrl} icon={ExternalLink} label="Ver projeto" primary />
                     <ProjectLink href={p.repoUrl} icon={Github} label="Ver código" />
                   </div>
@@ -152,7 +153,90 @@ export function Projects() {
           </button>
         )}
       </div>
+
+      <Dialog
+        open={Boolean(galleryProject)}
+        onOpenChange={(open) => {
+          if (!open) {
+            setGalleryProject(null);
+            setActiveImage(0);
+          }
+        }}
+      >
+        <DialogContent className="w-[calc(100%-1rem)] max-w-6xl overflow-hidden border-white/10 bg-graphite p-0 text-white sm:w-[calc(100%-2rem)]">
+          {galleryProject?.images?.length ? (
+            <>
+              <div className="border-b border-white/10 px-5 py-4 pr-12">
+                <DialogTitle className="font-display text-xl">{galleryProject.name}</DialogTitle>
+                <DialogDescription className="mt-1 text-white/60">
+                  Imagens do sistema — {activeImage + 1} de {galleryProject.images.length}
+                </DialogDescription>
+              </div>
+
+              <figure className="relative flex h-[55vh] min-h-64 items-center justify-center bg-black md:h-[70vh]">
+                <img
+                  src={galleryProject.images[activeImage].src}
+                  alt={galleryProject.images[activeImage].alt}
+                  className="h-full w-full object-contain"
+                />
+                {galleryProject.images.length > 1 ? (
+                  <>
+                    <GalleryButton
+                      label="Foto anterior"
+                      side="left"
+                      onClick={() =>
+                        setActiveImage((current) =>
+                          current === 0 ? galleryProject.images!.length - 1 : current - 1,
+                        )
+                      }
+                      icon={ChevronLeft}
+                    />
+                    <GalleryButton
+                      label="Próxima foto"
+                      side="right"
+                      onClick={() =>
+                        setActiveImage((current) =>
+                          current === galleryProject.images!.length - 1 ? 0 : current + 1,
+                        )
+                      }
+                      icon={ChevronRight}
+                    />
+                  </>
+                ) : null}
+              </figure>
+              <p className="px-5 py-3 text-center text-sm text-white/70">
+                {galleryProject.images[activeImage].alt}
+              </p>
+            </>
+          ) : null}
+        </DialogContent>
+      </Dialog>
     </section>
+  );
+}
+
+function GalleryButton({
+  label,
+  side,
+  onClick,
+  icon: Icon,
+}: {
+  label: string;
+  side: "left" | "right";
+  onClick: () => void;
+  icon: typeof ChevronLeft;
+}) {
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      onClick={onClick}
+      className={`absolute top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/70 text-white backdrop-blur transition hover:bg-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
+        side === "left" ? "left-2 md:left-4" : "right-2 md:right-4"
+      }`}
+    >
+      <Icon className="h-6 w-6" />
+    </button>
   );
 }
 
