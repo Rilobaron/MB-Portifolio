@@ -99,7 +99,7 @@ export const projects: Project[] = [
       "Gestão de dados",
       "Interface administrativa",
     ],
-    tech: [],
+    tech: ["React", "TypeScript", "Node.js", "APIs REST", "Banco de dados"],
     categories: ["Full Stack", "APIs e Integrações"],
     visualNote: "Projeto confidencial - imagens e código não disponíveis",
     confidential: true,
@@ -117,7 +117,7 @@ export const projects: Project[] = [
       "Regras configuráveis de monitoramento",
       "Indicadores e métricas operacionais",
     ],
-    tech: [],
+    tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "Supabase"],
     categories: ["Full Stack", "Automação"],
     images: [
       {

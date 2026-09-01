@@ -134,8 +134,17 @@ export function Projects() {
                         Ver fotos ({p.images.length})
                       </button>
                     ) : null}
-                    <ProjectLink href={p.liveUrl} icon={ExternalLink} label="Ver projeto" primary />
-                    <ProjectLink href={p.repoUrl} icon={Github} label="Ver código" />
+                    {p.liveUrl ? (
+                      <ProjectLink
+                        href={p.liveUrl}
+                        icon={ExternalLink}
+                        label="Ver projeto"
+                        primary
+                      />
+                    ) : null}
+                    {p.repoUrl ? (
+                      <ProjectLink href={p.repoUrl} icon={Github} label="Ver código" />
+                    ) : null}
                   </div>
                 )}
               </div>
@@ -173,11 +182,11 @@ export function Projects() {
                 </DialogDescription>
               </div>
 
-              <figure className="relative flex h-[55vh] min-h-64 items-center justify-center bg-black md:h-[70vh]">
+              <figure className="relative flex items-center justify-center overflow-hidden bg-black">
                 <img
                   src={galleryProject.images[activeImage].src}
                   alt={galleryProject.images[activeImage].alt}
-                  className="h-full w-full object-contain"
+                  className="block max-h-[calc(100vh-11rem)] w-full object-contain"
                 />
                 {galleryProject.images.length > 1 ? (
                   <>
