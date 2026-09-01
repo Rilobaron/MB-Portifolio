@@ -14,7 +14,7 @@ import { SectionHeader } from "./SectionHeader";
 
 export function Projects() {
   const [filter, setFilter] = useState<"Todos" | ProjectCategory>("Todos");
-  const [showAllMobile, setShowAllMobile] = useState(false);
+  const [page, setPage] = useState(1);
   const [galleryProject, setGalleryProject] = useState<Project | null>(null);
   const [activeImage, setActiveImage] = useState(0);
 
@@ -22,6 +22,14 @@ export function Projects() {
     () => (filter === "Todos" ? projects : projects.filter((p) => p.categories.includes(filter))),
     [filter],
   );
+  const pageSize = 4;
+  const pageCount = Math.max(1, Math.ceil(filtered.length / pageSize));
+  const visibleProjects = filtered.slice((page - 1) * pageSize, page * pageSize);
+
+  function changePage(nextPage: number) {
+    setPage(Math.min(Math.max(nextPage, 1), pageCount));
+    document.getElementById("projetos")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 
   return (
     <section id="projetos" className="overflow-hidden bg-secondary/60 py-16 md:py-28">
@@ -36,7 +44,10 @@ export function Projects() {
           {projectFilters.map((f) => (
             <button
               key={f}
-              onClick={() => setFilter(f)}
+              onClick={() => {
+                setFilter(f);
+                setPage(1);
+              }}
               className={`min-h-11 shrink-0 rounded-full border px-4 py-2 text-sm transition ${
                 filter === f
                   ? "bg-graphite text-white border-graphite"
@@ -49,12 +60,10 @@ export function Projects() {
         </div>
 
         <div className="mt-6 grid items-start gap-5 md:mt-8 md:grid-cols-2 md:gap-6">
-          {filtered.map((p, index) => (
+          {visibleProjects.map((p) => (
             <article
               key={p.id}
-              className={`group flex-col rounded-3xl border border-border bg-white overflow-hidden transition hover:-translate-y-1 hover:shadow-[0_25px_50px_-30px_rgba(0,0,0,0.25)] hover:border-gold/60 ${
-                index < 3 || showAllMobile ? "flex" : "hidden md:flex"
-              }`}
+              className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-white transition hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_25px_50px_-30px_rgba(0,0,0,0.25)]"
             >
               <div className="relative h-32 overflow-hidden bg-graphite sm:h-40">
                 <div
@@ -152,14 +161,42 @@ export function Projects() {
           ))}
         </div>
 
-        {filtered.length > 3 && (
-          <button
-            type="button"
-            onClick={() => setShowAllMobile((current) => !current)}
-            className="mt-6 flex min-h-11 w-full items-center justify-center rounded-full border border-graphite bg-white px-5 py-2.5 text-sm font-semibold text-graphite md:hidden"
+        {pageCount > 1 && (
+          <nav
+            className="mt-8 flex items-center justify-center gap-2"
+            aria-label="Paginação dos projetos"
           >
-            {showAllMobile ? "Mostrar menos projetos" : `Ver mais ${filtered.length - 3} projetos`}
-          </button>
+            <PaginationButton
+              label="Página anterior"
+              disabled={page === 1}
+              onClick={() => changePage(page - 1)}
+              icon={ChevronLeft}
+            />
+            <div className="flex items-center gap-2">
+              {Array.from({ length: pageCount }, (_, index) => index + 1).map((pageNumber) => (
+                <button
+                  key={pageNumber}
+                  type="button"
+                  aria-label={`Ir para a página ${pageNumber}`}
+                  aria-current={page === pageNumber ? "page" : undefined}
+                  onClick={() => changePage(pageNumber)}
+                  className={`flex h-11 min-w-11 items-center justify-center rounded-full border px-3 text-sm font-semibold transition ${
+                    page === pageNumber
+                      ? "border-graphite bg-graphite text-white"
+                      : "border-border bg-white text-graphite hover:border-gold"
+                  }`}
+                >
+                  {pageNumber}
+                </button>
+              ))}
+            </div>
+            <PaginationButton
+              label="Próxima página"
+              disabled={page === pageCount}
+              onClick={() => changePage(page + 1)}
+              icon={ChevronRight}
+            />
+          </nav>
         )}
       </div>
 
@@ -223,6 +260,30 @@ export function Projects() {
         </DialogContent>
       </Dialog>
     </section>
+  );
+}
+
+function PaginationButton({
+  label,
+  disabled,
+  onClick,
+  icon: Icon,
+}: {
+  label: string;
+  disabled: boolean;
+  onClick: () => void;
+  icon: typeof ChevronLeft;
+}) {
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      disabled={disabled}
+      onClick={onClick}
+      className="flex h-11 w-11 items-center justify-center rounded-full border border-border bg-white text-graphite transition hover:border-gold disabled:cursor-not-allowed disabled:opacity-35"
+    >
+      <Icon className="h-5 w-5" />
+    </button>
   );
 }
 
