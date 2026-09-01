@@ -4,7 +4,7 @@ import { SectionHeader } from "./SectionHeader";
 
 export function Experience() {
   return (
-    <section id="experiencia" className="py-20 md:py-28 bg-secondary/60">
+    <section id="experiencia" className="bg-secondary/60 py-16 md:py-28">
       <div className="container-p">
         <SectionHeader
           eyebrow="Experiência"
@@ -12,18 +12,18 @@ export function Experience() {
           description="Minha trajetória une suporte técnico, análise de sistemas, integrações, operações e desenvolvimento de soluções internas."
         />
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-2">
+        <div className="mt-8 grid items-start gap-5 md:mt-10 lg:grid-cols-2 lg:gap-6">
           {experiences.map((experience) => (
             <article
               key={experience.company}
-              className="rounded-3xl border border-border bg-white p-6 md:p-8 hover:border-gold/60 hover:shadow-md transition"
+              className="rounded-2xl border border-border bg-white p-5 transition hover:border-gold/60 hover:shadow-md sm:rounded-3xl sm:p-6 md:p-8"
             >
-              <div className="flex items-start gap-4">
-                <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gold/10 text-gold ring-1 ring-gold/20">
-                  <BriefcaseBusiness className="h-6 w-6" />
+              <div className="flex items-start gap-3 sm:gap-4">
+                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gold/10 text-gold ring-1 ring-gold/20 sm:h-12 sm:w-12 sm:rounded-2xl">
+                  <BriefcaseBusiness className="h-5 w-5 sm:h-6 sm:w-6" />
                 </span>
                 <div>
-                  <h3 className="font-display text-xl font-bold text-graphite">
+                  <h3 className="break-words font-display text-lg font-bold leading-tight text-graphite sm:text-xl">
                     {experience.company}
                   </h3>
                   <p className="mt-1 text-sm font-medium text-graphite/85">{experience.role}</p>

@@ -24,7 +24,7 @@ export function Projects() {
   );
 
   return (
-    <section id="projetos" className="py-20 md:py-28 bg-secondary/60">
+    <section id="projetos" className="overflow-hidden bg-secondary/60 py-16 md:py-28">
       <div className="container-p">
         <SectionHeader
           eyebrow="Projetos"
@@ -32,12 +32,12 @@ export function Projects() {
           description="Uma seleção de projetos que representam meu foco em backend, integrações e produtos completos."
         />
 
-        <div className="mt-8 flex flex-wrap gap-2">
+        <div className="-mx-4 mt-7 flex gap-2 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:px-0">
           {projectFilters.map((f) => (
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`rounded-full border px-4 py-1.5 text-sm transition ${
+              className={`min-h-11 shrink-0 rounded-full border px-4 py-2 text-sm transition ${
                 filter === f
                   ? "bg-graphite text-white border-graphite"
                   : "bg-white text-graphite border-border hover:border-gold/70"
@@ -48,7 +48,7 @@ export function Projects() {
           ))}
         </div>
 
-        <div className="mt-8 grid gap-6 md:grid-cols-2">
+        <div className="mt-6 grid items-start gap-5 md:mt-8 md:grid-cols-2 md:gap-6">
           {filtered.map((p, index) => (
             <article
               key={p.id}
@@ -56,7 +56,7 @@ export function Projects() {
                 index < 3 || showAllMobile ? "flex" : "hidden md:flex"
               }`}
             >
-              <div className="relative h-40 bg-graphite overflow-hidden">
+              <div className="relative h-32 overflow-hidden bg-graphite sm:h-40">
                 <div
                   className="absolute inset-0 opacity-20"
                   style={{
@@ -66,7 +66,7 @@ export function Projects() {
                   }}
                 />
                 <div className="absolute inset-0 flex flex-col items-center justify-center px-5 text-center">
-                  <div className="rounded-2xl border border-white/15 bg-white/5 backdrop-blur px-5 py-3 text-white font-display text-lg font-bold">
+                  <div className="max-w-[calc(100%-2rem)] rounded-2xl border border-white/15 bg-white/5 px-4 py-2.5 text-center font-display text-base font-bold text-white backdrop-blur sm:px-5 sm:py-3 sm:text-lg">
                     <span className="text-gold mr-2">/</span>
                     {p.name}
                   </div>
@@ -83,7 +83,7 @@ export function Projects() {
                 )}
               </div>
 
-              <div className="flex flex-col flex-1 p-6">
+              <div className="flex flex-1 flex-col p-5 sm:p-6">
                 <h3 className="font-display text-xl font-bold text-graphite">{p.name}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ash">{p.description}</p>
 
@@ -91,7 +91,7 @@ export function Projects() {
                   <p className="text-xs font-semibold uppercase tracking-widest text-gold">
                     Funcionalidades
                   </p>
-                  <ul className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 text-sm text-graphite/85">
+                  <ul className="mt-2 grid grid-cols-1 gap-x-4 gap-y-1.5 text-sm text-graphite/85 sm:grid-cols-2">
                     {p.features.slice(0, 6).map((f) => (
                       <li key={f} className="flex items-start gap-2">
                         <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-gold" />
@@ -120,7 +120,7 @@ export function Projects() {
                     Materiais preservados por confidencialidade.
                   </p>
                 ) : (
-                  <div className="mt-6 flex flex-wrap gap-2 pt-4 border-t border-border">
+                  <div className="mt-5 grid grid-cols-1 gap-2 border-t border-border pt-4 min-[390px]:flex min-[390px]:flex-wrap sm:mt-6">
                     {p.images?.length ? (
                       <button
                         type="button"
@@ -128,7 +128,7 @@ export function Projects() {
                           setGalleryProject(p);
                           setActiveImage(0);
                         }}
-                        className="inline-flex items-center gap-1.5 rounded-full bg-graphite px-3.5 py-1.5 text-sm font-medium text-white transition hover:bg-black"
+                        className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full bg-graphite px-4 py-2 text-sm font-medium text-white transition hover:bg-black"
                       >
                         <Images className="h-4 w-4 text-gold" />
                         Ver fotos ({p.images.length})
@@ -172,21 +172,23 @@ export function Projects() {
           }
         }}
       >
-        <DialogContent className="w-[calc(100%-1rem)] max-w-6xl overflow-hidden border-white/10 bg-graphite p-0 text-white sm:w-[calc(100%-2rem)]">
+        <DialogContent className="flex max-h-[calc(100dvh-1rem)] w-[calc(100%-1rem)] max-w-6xl flex-col overflow-hidden rounded-2xl border-white/10 bg-graphite p-0 text-white sm:max-h-[calc(100dvh-2rem)] sm:w-[calc(100%-2rem)] sm:rounded-3xl">
           {galleryProject?.images?.length ? (
             <>
-              <div className="border-b border-white/10 px-5 py-4 pr-12">
-                <DialogTitle className="font-display text-xl">{galleryProject.name}</DialogTitle>
+              <div className="shrink-0 border-b border-white/10 px-4 py-3 pr-12 sm:px-5 sm:py-4">
+                <DialogTitle className="font-display text-lg sm:text-xl">
+                  {galleryProject.name}
+                </DialogTitle>
                 <DialogDescription className="mt-1 text-white/60">
                   Imagens do sistema — {activeImage + 1} de {galleryProject.images.length}
                 </DialogDescription>
               </div>
 
-              <figure className="relative flex items-center justify-center overflow-hidden bg-black">
+              <figure className="relative flex min-h-0 flex-1 items-center justify-center overflow-hidden bg-black">
                 <img
                   src={galleryProject.images[activeImage].src}
                   alt={galleryProject.images[activeImage].alt}
-                  className="block max-h-[calc(100vh-11rem)] w-full object-contain"
+                  className="block max-h-[calc(100dvh-9.5rem)] w-full object-contain sm:max-h-[calc(100dvh-11rem)]"
                 />
                 {galleryProject.images.length > 1 ? (
                   <>
@@ -213,7 +215,7 @@ export function Projects() {
                   </>
                 ) : null}
               </figure>
-              <p className="px-5 py-3 text-center text-sm text-white/70">
+              <p className="shrink-0 px-4 py-2.5 text-center text-xs text-white/70 sm:px-5 sm:py-3 sm:text-sm">
                 {galleryProject.images[activeImage].alt}
               </p>
             </>
@@ -240,7 +242,7 @@ function GalleryButton({
       type="button"
       aria-label={label}
       onClick={onClick}
-      className={`absolute top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/70 text-white backdrop-blur transition hover:bg-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
+      className={`absolute top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/75 text-white shadow-lg backdrop-blur transition hover:bg-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold sm:h-11 sm:w-11 ${
         side === "left" ? "left-2 md:left-4" : "right-2 md:right-4"
       }`}
     >
@@ -261,7 +263,7 @@ function ProjectLink({
   primary?: boolean;
 }) {
   const base =
-    "inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm font-medium transition";
+    "inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition";
   const styles = primary
     ? "bg-graphite text-white hover:bg-black"
     : "border border-border text-graphite hover:border-gold/70 hover:text-black";
