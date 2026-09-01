@@ -7,6 +7,7 @@ export const site = {
   email: "murilopereira1461@gmail.com",
   whatsapp: {
     number: "+55 11 97403-6062",
+    numberDigits: "5511974036062",
     href:
       "https://wa.me/5511974036062?text=" +
       encodeURIComponent(

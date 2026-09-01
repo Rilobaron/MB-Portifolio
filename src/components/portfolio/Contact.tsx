@@ -23,7 +23,7 @@ export function Contact() {
     return errs;
   };
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
@@ -44,32 +44,30 @@ export function Contact() {
 
     setStatus("sending");
     try {
-      // Envia via mailto como fallback confiável, sem expor chaves no frontend.
-      // Para envio automatizado, conecte Resend + função serverless
-      // (ver .env.example na raiz do projeto).
       const name = String(data.get("name"));
       const email = String(data.get("email"));
       const phone = String(data.get("phone") || "");
       const subject = String(data.get("subject"));
       const message = String(data.get("message"));
 
-      const body = [
-        `Nome: ${name}`,
-        `E-mail: ${email}`,
-        phone ? `Telefone: ${phone}` : "",
+      const whatsappMessage = [
+        "Olá, Murilo! Encontrei seu contato pelo portfólio.",
         "",
+        `*Nome:* ${name}`,
+        `*E-mail:* ${email}`,
+        phone ? `*Telefone:* ${phone}` : "",
+        `*Assunto:* ${subject}`,
+        "",
+        "*Mensagem:*",
         message,
       ]
         .filter(Boolean)
         .join("\n");
 
-      const mailto = `mailto:${site.email}?subject=${encodeURIComponent(
-        `[Portfólio] ${subject}`,
-      )}&body=${encodeURIComponent(body)}`;
-
-      // Simula pequena latência para feedback visual
-      await new Promise((r) => setTimeout(r, 400));
-      window.location.href = mailto;
+      const whatsappUrl = `https://wa.me/${site.whatsapp.numberDigits}?text=${encodeURIComponent(whatsappMessage)}`;
+      const whatsappWindow = window.open(whatsappUrl, "_blank");
+      if (whatsappWindow) whatsappWindow.opener = null;
+      else window.location.href = whatsappUrl;
 
       lastSentRef.current = Date.now();
       setStatus("success");
@@ -184,11 +182,11 @@ export function Contact() {
               >
                 {status === "sending" ? (
                   <>
-                    <Loader2 className="h-4 w-4 animate-spin" /> Enviando...
+                    <Loader2 className="h-4 w-4 animate-spin" /> Abrindo...
                   </>
                 ) : (
                   <>
-                    <Send className="h-4 w-4 text-gold" /> Enviar mensagem
+                    <Send className="h-4 w-4 text-gold" /> Continuar no WhatsApp
                   </>
                 )}
               </button>
@@ -196,7 +194,7 @@ export function Contact() {
               {status === "success" && (
                 <p className="inline-flex items-center gap-2 text-sm text-graphite">
                   <CheckCircle2 className="h-4 w-4 text-gold" />
-                  Abrimos seu cliente de e-mail. Obrigado pelo contato!
+                  WhatsApp aberto. Revise a mensagem e toque em enviar.
                 </p>
               )}
               {status === "error" && (
