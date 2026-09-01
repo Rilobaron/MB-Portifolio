@@ -1,9 +1,10 @@
-// TODO: Substituir os cursos abaixo pelos cursos reais realizados por Murilo.
-// Não inventar certificados. Os dados abaixo servem apenas como estrutura
-// visual e devem ser trocados por informações verdadeiras.
-
 export type CourseCategory =
-  "Desenvolvimento Web" | "Backend" | "Banco de Dados" | "DevOps" | "APIs e Integrações" | "Outros";
+  | "Desenvolvimento Web"
+  | "Tecnologia e Infraestrutura"
+  | "Ferramentas"
+  | "Negócios e Carreira"
+  | "Idiomas"
+  | "Outros";
 
 export type Course = {
   title: string;
@@ -23,12 +24,31 @@ export const courses: Course[] = [
     category: "Desenvolvimento Web",
   },
   {
+    title: "Robótica",
+    institution: "USP EducaSP",
+    hours: "40 horas",
+    year: "2020",
+    topics: [],
+    certificateUrl: "/certificados/robotica.pdf",
+    category: "Tecnologia e Infraestrutura",
+  },
+  {
+    title: "Desvendando a Blockchain",
+    institution: "SENAI-SP",
+    hours: "20 horas",
+    year: "2020",
+    topics: [],
+    certificateUrl: "/certificados/desvendando-a-blockchain.pdf",
+    category: "Tecnologia e Infraestrutura",
+  },
+  {
     title: "Arquitetura de Redes",
     institution: "Udemy · Gabriel Torres",
     hours: "20,5 horas",
     year: "2022",
     topics: [],
-    category: "Outros",
+    certificateUrl: "/certificados/arquitetura-de-redes.pdf",
+    category: "Tecnologia e Infraestrutura",
   },
   {
     title: "Microsoft Excel — Excel from Beginner to Advanced",
@@ -36,7 +56,8 @@ export const courses: Course[] = [
     hours: "22 horas",
     year: "2026",
     topics: [],
-    category: "Outros",
+    certificateUrl: "/certificados/microsoft-excel.pdf",
+    category: "Ferramentas",
   },
   {
     title: "The Complete Flutter Development Bootcamp with Dart",
@@ -44,6 +65,7 @@ export const courses: Course[] = [
     hours: "29 horas",
     year: "2023",
     topics: [],
+    certificateUrl: "/certificados/flutter-dart.pdf",
     category: "Desenvolvimento Web",
   },
   {
@@ -51,33 +73,61 @@ export const courses: Course[] = [
     institution: "EF SET",
     year: "2023",
     topics: ["Pontuação geral: 57/100", "Listening: C1 Advanced", "Reading: B1 Intermediate"],
-    category: "Outros",
+    certificateUrl: "/certificados/ef-set-b2.pdf",
+    category: "Idiomas",
   },
   {
     title: "TOEIC — Certificação internacional de inglês",
     institution: "TOEIC",
     topics: ["Proficiência em língua inglesa"],
-    category: "Outros",
+    category: "Idiomas",
   },
   {
     title: "Gestão Comercial",
     institution: "ETEC",
     topics: [],
-    category: "Outros",
+    category: "Negócios e Carreira",
   },
   {
-    title: "Curso de Administração",
-    institution: "IEFY",
+    title: "Administração",
+    institution: "Instituto Educacional Formação Profissional de Itu (IEFY)",
+    hours: "100 horas",
+    year: "2020",
+    topics: [
+      "Marketing",
+      "Contabilidade",
+      "Departamento Pessoal",
+      "Teoria Geral da Administração",
+      "TCC",
+    ],
+    certificateUrl: "/certificados/administracao-iefy.pdf",
+    category: "Negócios e Carreira",
+  },
+  {
+    title: "Marketing Digital",
+    institution: "Digital House",
+    hours: "5 horas",
+    year: "2021",
     topics: [],
-    category: "Outros",
+    certificateUrl: "/certificados/marketing-digital.pdf",
+    category: "Negócios e Carreira",
+  },
+  {
+    title: "Inteligência Emocional",
+    institution: "Escola Conquer",
+    hours: "10 horas",
+    year: "2021",
+    topics: [],
+    certificateUrl: "/certificados/inteligencia-emocional.pdf",
+    category: "Negócios e Carreira",
   },
 ];
 
 export const courseCategories: CourseCategory[] = [
   "Desenvolvimento Web",
-  "Backend",
-  "Banco de Dados",
-  "DevOps",
-  "APIs e Integrações",
+  "Tecnologia e Infraestrutura",
+  "Ferramentas",
+  "Negócios e Carreira",
+  "Idiomas",
   "Outros",
 ];
