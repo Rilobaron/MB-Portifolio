@@ -25,7 +25,11 @@ export function Navbar() {
       <div className="container-p flex h-16 items-center justify-between">
         <a href="#inicio" className="flex items-center gap-2.5" aria-label="Início">
           <Logo />
-          <span className="font-display font-extrabold tracking-tight text-graphite">
+          <span
+            className={`font-display font-extrabold tracking-tight transition-colors ${
+              scrolled ? "text-graphite" : "text-white"
+            }`}
+          >
             Murilo Baron
           </span>
         </a>
@@ -51,7 +55,9 @@ export function Navbar() {
         </a>
 
         <button
-          className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-md text-graphite hover:bg-black/5"
+          className={`lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-md transition-colors ${
+            scrolled ? "text-graphite hover:bg-black/5" : "text-white hover:bg-white/10"
+          }`}
           onClick={() => setOpen(true)}
           aria-label="Abrir menu"
         >

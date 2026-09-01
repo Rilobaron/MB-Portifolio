@@ -69,11 +69,11 @@ export function Education() {
                   <h3 className="flex items-center gap-3 font-display text-lg font-bold text-graphite">
                     <span className="gold-line" /> {cat}
                   </h3>
-                  <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  <div className="mt-4 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3 sm:grid sm:grid-cols-2 sm:overflow-visible lg:grid-cols-3">
                     {list.map((c, i) => (
                       <article
                         key={i}
-                        className="rounded-2xl border border-border bg-white p-5 hover:border-gold/60 hover:shadow-md transition"
+                        className="min-w-[85%] snap-start rounded-2xl border border-border bg-white p-5 hover:border-gold/60 hover:shadow-md transition sm:min-w-0"
                       >
                         <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gold/10 text-gold ring-1 ring-gold/20">
                           <Award className="h-5 w-5" />

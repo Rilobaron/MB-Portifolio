@@ -5,6 +5,7 @@ import { SectionHeader } from "./SectionHeader";
 
 export function Projects() {
   const [filter, setFilter] = useState<"Todos" | ProjectCategory>("Todos");
+  const [showAllMobile, setShowAllMobile] = useState(false);
 
   const filtered = useMemo(
     () => (filter === "Todos" ? projects : projects.filter((p) => p.categories.includes(filter))),
@@ -37,10 +38,12 @@ export function Projects() {
         </div>
 
         <div className="mt-8 grid gap-6 md:grid-cols-2">
-          {filtered.map((p) => (
+          {filtered.map((p, index) => (
             <article
               key={p.id}
-              className="group flex flex-col rounded-3xl border border-border bg-white overflow-hidden transition hover:-translate-y-1 hover:shadow-[0_25px_50px_-30px_rgba(0,0,0,0.25)] hover:border-gold/60"
+              className={`group flex-col rounded-3xl border border-border bg-white overflow-hidden transition hover:-translate-y-1 hover:shadow-[0_25px_50px_-30px_rgba(0,0,0,0.25)] hover:border-gold/60 ${
+                index < 3 || showAllMobile ? "flex" : "hidden md:flex"
+              }`}
             >
               <div className="relative h-40 bg-graphite overflow-hidden">
                 <div
@@ -99,6 +102,16 @@ export function Projects() {
             </article>
           ))}
         </div>
+
+        {filtered.length > 3 && (
+          <button
+            type="button"
+            onClick={() => setShowAllMobile((current) => !current)}
+            className="mt-6 flex min-h-11 w-full items-center justify-center rounded-full border border-graphite bg-white px-5 py-2.5 text-sm font-semibold text-graphite md:hidden"
+          >
+            {showAllMobile ? "Mostrar menos projetos" : `Ver mais ${filtered.length - 3} projetos`}
+          </button>
+        )}
       </div>
     </section>
   );
