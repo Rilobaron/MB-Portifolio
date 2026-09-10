@@ -78,7 +78,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contato" className="py-20 md:py-28 bg-secondary/60">
+    <section id="contato" className="bg-secondary/60 py-16 md:py-28">
       <div className="container-p">
         <SectionHeader
           eyebrow="Contato"
@@ -87,9 +87,9 @@ export function Contact() {
           align="center"
         />
 
-        <div className="mt-12 grid lg:grid-cols-[1fr_1.2fr] gap-8">
+        <div className="mt-9 grid gap-6 md:mt-12 lg:grid-cols-[1fr_1.2fr] lg:gap-8">
           {/* Info card */}
-          <div className="rounded-3xl bg-graphite text-white p-8 relative overflow-hidden">
+          <div className="relative overflow-hidden rounded-2xl bg-graphite p-5 text-white sm:rounded-3xl sm:p-8">
             <div
               className="absolute -bottom-16 -right-16 h-64 w-64 rounded-full blur-3xl opacity-25"
               style={{ background: "radial-gradient(circle, #CCAA4B 0%, transparent 70%)" }}
@@ -108,11 +108,11 @@ export function Contact() {
                   <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gold/15 text-gold">
                     <Mail className="h-5 w-5" />
                   </span>
-                  <span>
+                  <span className="min-w-0">
                     <span className="block text-xs uppercase tracking-widest text-white/60">
                       E-mail
                     </span>
-                    <span className="block text-sm">{site.email}</span>
+                    <span className="block break-all text-sm">{site.email}</span>
                   </span>
                 </a>
                 <a
@@ -124,7 +124,7 @@ export function Contact() {
                   <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gold/15 text-gold">
                     <Phone className="h-5 w-5" />
                   </span>
-                  <span>
+                  <span className="min-w-0">
                     <span className="block text-xs uppercase tracking-widest text-white/60">
                       WhatsApp
                     </span>
@@ -139,7 +139,7 @@ export function Contact() {
           <form
             onSubmit={onSubmit}
             noValidate
-            className="rounded-3xl border border-border bg-white p-6 md:p-8 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.25)]"
+            className="rounded-2xl border border-border bg-white p-5 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.25)] sm:rounded-3xl sm:p-6 md:p-8"
           >
             {/* Honeypot (invisível) */}
             <input
@@ -174,11 +174,11 @@ export function Contact() {
               )}
             </div>
 
-            <div className="mt-6 flex flex-wrap items-center gap-4">
+            <div className="mt-6 grid gap-4 min-[390px]:flex min-[390px]:flex-wrap min-[390px]:items-center">
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="inline-flex items-center gap-2 rounded-full bg-graphite text-white px-5 py-3 text-sm font-semibold hover:bg-black transition disabled:opacity-60"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-graphite px-5 py-3 text-sm font-semibold text-white transition hover:bg-black disabled:opacity-60"
               >
                 {status === "sending" ? (
                   <>

@@ -22,7 +22,7 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Conversar no WhatsApp"
-      className={`fixed bottom-4 right-4 z-40 inline-flex h-12 w-12 md:bottom-5 md:right-5 md:h-14 md:w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_15px_30px_-10px_rgba(37,211,102,0.6)] transition-all hover:scale-105 active:scale-95 ${
+      className={`fixed bottom-[calc(1.25rem+env(safe-area-inset-bottom))] right-5 z-40 hidden h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_15px_30px_-10px_rgba(37,211,102,0.6)] transition-all hover:scale-105 active:scale-95 sm:inline-flex ${
         contactVisible ? "pointer-events-none translate-y-20 opacity-0" : "opacity-100"
       }`}
     >

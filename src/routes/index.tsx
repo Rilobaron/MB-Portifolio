@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/portfolio/Navbar";
 import { Hero } from "@/components/portfolio/Hero";
 import { About } from "@/components/portfolio/About";
+import { Services } from "@/components/portfolio/Services";
 import { Interests } from "@/components/portfolio/Interests";
 import { Experience } from "@/components/portfolio/Experience";
 import { Technologies } from "@/components/portfolio/Technologies";
@@ -34,11 +35,16 @@ export const Route = createFileRoute("/")({
             addressCountry: "BR",
           },
           knowsAbout: [
+            "Desenvolvimento Web",
+            "Desenvolvimento de Sistemas",
+            "Frontend Development",
             "Backend Development",
             "APIs REST",
             "Webhooks",
             "Integrações de Sistemas",
             "Automação de Processos",
+            "Suporte Técnico",
+            "DevOps",
             "Node.js",
             "TypeScript",
             "PostgreSQL",
@@ -56,6 +62,7 @@ function Index() {
       <main>
         <Hero />
         <About />
+        <Services />
         <Experience />
         <Interests />
         <Technologies />

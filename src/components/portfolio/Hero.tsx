@@ -7,7 +7,7 @@ export function Hero() {
   return (
     <section
       id="inicio"
-      className="relative overflow-hidden bg-graphite text-white pt-28 pb-24 md:pt-36 md:pb-32"
+      className="relative overflow-hidden bg-graphite pb-16 pt-24 text-white sm:pb-20 sm:pt-28 md:pb-32 md:pt-36"
     >
       {/* Decorative background */}
       <div
@@ -24,14 +24,14 @@ export function Hero() {
         style={{ background: "radial-gradient(circle, #CCAA4B 0%, transparent 70%)" }}
       />
 
-      <div className="container-p relative grid lg:grid-cols-[1.15fr_1fr] gap-14 items-center">
+      <div className="container-p relative grid items-center gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-14">
         <div className="animate-fade-up">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/80 mb-6">
             <span className="h-1.5 w-1.5 rounded-full bg-gold" />
             Disponível para novos projetos
           </div>
 
-          <h1 className="font-display font-extrabold text-4xl md:text-6xl leading-[1.05] tracking-tight">
+          <h1 className="break-words font-display text-4xl font-extrabold leading-[1.05] tracking-tight md:text-6xl">
             Murilo Baron <span className="text-gold">Pereira</span>
           </h1>
           <p className="mt-5 text-lg md:text-xl text-white/85">
@@ -44,17 +44,17 @@ export function Hero() {
             problemas reais.
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-8 grid gap-3 sm:flex sm:flex-wrap">
             <a
               href="#projetos"
-              className="inline-flex items-center gap-2 rounded-full bg-gold text-black px-5 py-3 text-sm font-semibold shadow-[0_10px_30px_-12px_rgba(204,170,75,0.7)] hover:brightness-105 transition"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-gold px-5 py-3 text-sm font-semibold text-black shadow-[0_10px_30px_-12px_rgba(204,170,75,0.7)] transition hover:brightness-105"
             >
               Conhecer meus projetos
               <ArrowRight className="h-4 w-4" />
             </a>
             <a
               href="#contato"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 text-white px-5 py-3 text-sm font-medium hover:bg-white/10 transition"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-5 py-3 text-sm font-medium text-white transition hover:bg-white/10"
             >
               <MessageCircle className="h-4 w-4 text-gold" />
               Entrar em contato
@@ -62,7 +62,7 @@ export function Hero() {
             <a
               href={site.resumeUrl}
               download
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 text-white px-5 py-3 text-sm font-medium hover:bg-white/10 transition"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-5 py-3 text-sm font-medium text-white transition hover:bg-white/10"
             >
               <Download className="h-4 w-4 text-gold" />
               Baixar currículo
@@ -83,7 +83,7 @@ export function Hero() {
 
         {/* Visual composition */}
         <div className="relative animate-fade-up">
-          <div className="relative aspect-square max-w-md mx-auto">
+          <div className="relative mx-auto aspect-square w-[min(100%,26rem)] max-w-md">
             <div className="absolute inset-8 rounded-3xl border border-white/10 bg-white/[0.03] overflow-hidden shadow-2xl">
               <img
                 src={site.photoUrl}
@@ -99,13 +99,13 @@ export function Hero() {
             <div className="absolute -top-2 left-2 rounded-xl border border-white/10 bg-graphite-2/90 backdrop-blur px-3 py-2 text-[11px] font-mono text-white/85 shadow-xl animate-float">
               <span className="text-gold">POST</span> /api/webhooks
             </div>
-            <div className="absolute top-1/3 -right-4 rounded-xl border border-white/10 bg-graphite-2/90 backdrop-blur px-3 py-2 text-[11px] font-mono text-white/85 shadow-xl animate-float [animation-delay:1.5s]">
+            <div className="absolute right-0 top-1/3 rounded-xl border border-white/10 bg-graphite-2/90 px-3 py-2 font-mono text-[11px] text-white/85 shadow-xl backdrop-blur animate-float [animation-delay:1.5s] sm:-right-4">
               200 <span className="text-gold">OK</span>
             </div>
             <div className="absolute -bottom-2 left-6 rounded-xl border border-white/10 bg-graphite-2/90 backdrop-blur px-3 py-2 text-[11px] font-mono text-white/85 shadow-xl animate-float [animation-delay:3s]">
               db.<span className="text-gold">query</span>()
             </div>
-            <div className="absolute bottom-8 -right-2 rounded-xl border border-white/10 bg-graphite-2/90 backdrop-blur px-3 py-2 text-[11px] font-mono text-white/85 shadow-xl animate-float [animation-delay:2s]">
+            <div className="absolute bottom-8 right-0 rounded-xl border border-white/10 bg-graphite-2/90 px-3 py-2 font-mono text-[11px] text-white/85 shadow-xl backdrop-blur animate-float [animation-delay:2s] sm:-right-2">
               <span className="text-gold">async</span> integrate()
             </div>
 

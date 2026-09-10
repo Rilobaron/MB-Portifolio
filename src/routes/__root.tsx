@@ -83,7 +83,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Portfólio de Murilo Baron Pereira, programador Full Stack com experiência em desenvolvimento web, APIs, integrações e automação de processos.",
+          "Portfólio de Murilo Baron Pereira, desenvolvedor freelancer Full Stack especializado em desenvolvimento web, sistemas, integração de APIs, automação, suporte técnico e DevOps.",
       },
       { name: "author", content: "Murilo Baron Pereira" },
       { name: "theme-color", content: "#262933" },
@@ -94,7 +94,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         property: "og:description",
         content:
-          "Desenvolvimento web, aplicações Full Stack, APIs, integrações de sistemas e automação de processos.",
+          "Desenvolvimento web, frontend, sistemas Full Stack, integração de APIs, automação, suporte técnico e DevOps.",
       },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Murilo Baron Pereira" },

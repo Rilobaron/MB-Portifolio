@@ -50,7 +50,7 @@ export function Footer() {
           <h4 className="text-xs uppercase tracking-widest text-gold font-semibold">Contato</h4>
           <ul className="mt-4 space-y-2 text-sm text-white/80">
             <li>
-              <a className="hover:text-gold transition" href={`mailto:${site.email}`}>
+              <a className="break-all transition hover:text-gold" href={`mailto:${site.email}`}>
                 {site.email}
               </a>
             </li>
