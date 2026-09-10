@@ -3,7 +3,7 @@ export const site = {
   role: "Programador Full Stack",
   location: "Itu, SP",
   resumeUrl: "/documents/curriculo-murilo-baron-pereira.pdf",
-  photoUrl: "/images/murilo-baron.jpg",
+  photoUrl: "/images/murilo-baron-2026.png",
   email: "murilopereira1461@gmail.com",
   whatsapp: {
     number: "+55 11 97403-6062",
